@@ -1,0 +1,113 @@
+{
+  "book": {
+    "_model": "Book",
+    "book1": {
+      "ISBN": "1299427383",
+      "Title": "Pale Fire",
+      "Author": "Vladimir Nabokov",
+      "Category": "Fiction",
+      "Publisher": "Penguin Books",
+      "CurrentStock": 3
+    },
+    "book2": {
+      "ISBN": "0882332287",
+      "Title": "Lolita",
+      "Author": "Vladimir Nabokov",
+      "Category": "Fiction",
+      "Publisher": "House Books",
+      "CurrentStock": 1
+    },
+    "book3": {
+      "ISBN": "0133752054",
+      "Title": "Calculus/Brief Calculus",
+      "Author": "Larry Goldstein",
+      "Category": "Academic",
+      "Publisher": "Solution Manual",
+      "CurrentStock": 10
+    },
+    "book4": {
+      "ISBN": "880618315x",
+      "Title": "Norwegian Wood",
+      "Author": "Haruki Murakami",
+      "Category": "Fiction",
+      "Publisher": "Vintage Classic",
+      "CurrentStock": 2
+    },
+    "book5": {
+      "ISBN": "1400079276",
+      "Title": "Kafka On The Shore",
+      "Author": "Haruki Murakami",
+      "Category": "Fiction",
+      "Publisher": "Vintage International",
+      "CurrentStock": 4
+    },
+    "book6": {
+      "ISBN": "0965341984",
+      "Title": "The Wind-Up Bird Chronicle",
+      "Author": "Haruki Murakami",
+      "Category": "Fiction",
+      "Publisher": "Vintage International",
+      "CurrentStock": 1
+    },
+    "book7": {
+      "ISBN": "1400078776",
+      "Title": "Never Let Me Go",
+      "Author": "Kazuo Ishiguro",
+      "Category": "Fiction",
+      "Publisher": "Vintage International",
+      "CurrentStock": 1
+    },
+    "book8": {
+      "ISBN": "1892295490 ",
+      "Title": "Heart of Darkness",
+      "Author": "Joseph Conrad",
+      "Category": "Fiction",
+      "Publisher": "Green Integer",
+      "CurrentStock": 1
+    },
+    "book9": {
+      "ISBN": "0811223639",
+      "Title": "Cantik itu Luka",
+      "Author": "Eka Kurniawan",
+      "Category": "Fiction",
+      "Publisher": "AKY Press",
+      "CurrentStock": 3
+    },
+    "book10": {
+      "ISBN": "1781688591",
+      "Title": "Man Tiger",
+      "Author": "Eka Kurniawan",
+      "Category": "Fiction",
+      "Publisher": "Verso Books",
+      "CurrentStock": 2
+    }
+  },
+  "member": {
+    "_model": "Member",
+    "member1": {
+      "Name": "Toru Watanabe",
+      "Address": "23 Sendagawa Street, Tokyo",
+      "Phone": "081234455231"
+    },
+    "member2": {
+      "Name": "Charles Marlow",
+      "Address": "11th Avenue, London",
+      "Phone": "08887653532"
+    },
+    "member3": {
+      "Name": "Tengo Kawana",
+      "Address": "Nanyang Ring, Tokyo",
+      "Phone": "08767554242"
+    },
+    "member4": {
+      "Name": "Michael Corleone",
+      "Address": "Corleone Avenue, Long Beach, New York",
+      "Phone": "083458737373"
+    },
+    "member5": {
+      "Name": "Kathy H.",
+      "Address": "Hailsham Mansion",
+      "Phone": "085877621231"
+    }
+  }
+}

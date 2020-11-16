@@ -4,10 +4,17 @@ const cookieParser = require('cookie-parser')
 const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('./routes/postman.json')
 const mongoose = require('mongoose')
+const autoIncrement = require('mongoose-auto-increment')
 mongoose.Promise = require('bluebird')
 require('dotenv').config()
 
 // Mongo
+var connection = mongoose.createConnection(process.env.MONGO_URL, {
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+autoIncrement.initialize(connection)
 const mongoClient = mongoose.connect(process.env.MONGO_URL, {
   useCreateIndex: true,
   useNewUrlParser: true,

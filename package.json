@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npx jest --verbose --forceExit --detectOpenHandles --maxWorkers=10",
     "start": "npx nodemon src/server.js",
-    "commit": "npx cz"
+    "commit": "npx cz",
+    "seed": "node src/scripts/seeder.js"
   },
   "keywords": [
     "api",
@@ -26,6 +27,8 @@
     "http-errors": "^1.8.0",
     "mongodb": "^3.6.3",
     "mongoose": "^5.10.14",
+    "mongoose-auto-increment": "^5.0.1",
+    "mongoose-data-seeder": "^1.0.3",
     "morgan": "^1.10.0",
     "swagger-jsdoc": "^5.0.1",
     "swagger-ui-express": "^4.1.4"

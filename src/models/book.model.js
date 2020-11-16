@@ -1,7 +1,11 @@
 const mongoose = require('mongoose')
+const autoIncrement = require('mongoose-auto-increment')
 
 const bookSchema = new mongoose.Schema({
-  _id: Number,
+  Book_id: {
+    type: Number,
+    required: true
+  },
   ISBN: {
     type: String,
     unique: true,
@@ -40,6 +44,11 @@ const bookSchema = new mongoose.Schema({
       ref: 'Member'
     }
   ]
+})
+
+bookSchema.plugin(autoIncrement.plugin, {
+  model: 'Book',
+  field: 'Book_id'
 })
 
 // bookSchema.methods.

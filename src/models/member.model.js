@@ -1,7 +1,11 @@
 const mongoose = require('mongoose')
+const autoIncrement = require('mongoose-auto-increment')
 
 const memberSchema = mongoose.Schema({
-  _id: Number,
+  Member_id: {
+    type: Number,
+    required: true
+  },
   Name: {
     type: String,
     required: true
@@ -27,6 +31,11 @@ const memberSchema = mongoose.Schema({
       ref: 'Member'
     }
   ]
+})
+
+memberSchema.plugin(autoIncrement.plugin, {
+  model: 'Member',
+  field: 'Member_id'
 })
 
 const Member = mongoose.model('Member', memberSchema, 'Members')
