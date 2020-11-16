@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
 const borrowingSchema = mongoose.Schema({
-  _id: Number,
   Book: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Book'
