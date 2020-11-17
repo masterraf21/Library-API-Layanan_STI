@@ -11,30 +11,26 @@ var connection = mongoose.createConnection(urlCloud, {
 autoIncrement.initialize(connection)
 const db = require('../models')
 
-const run = async function () {
-  try {
-    const book = await db.Book.findOne({
-      Book_id: 3
-    })
-    const member = await db.Member.findOne({
-      Member_id: 3
-    })
-    console.log(book)
-    console.log(member)
-    const result = await createBorrowing(book, member)
-    console.log(result)
-    if (result) {
-      console.log('Added borrowings!!')
-    } else {
-      console.log('Failed Add Borrowings')
-    }
-
-    mongoose.connection.close(function () {
-      process.exit(0)
-    })
-  } catch (err) {
-    console.log(err)
-  }
+const exit = function () {
+  mongoose.connection.close(function () {
+    process.exit(0)
+  })
+}
+const run = function () {
+  createBorrowing(3, 3)
+    .then(
+      result => {
+        console.log('Created Borrowing')
+        console.log(result)
+        exit()
+      },
+      err => {
+        console.log('Failed created borrowing')
+        console.error(err.message)
+        exit()
+      }
+    )
+    .catch(err => console.error(err.message))
 }
 
 const mongoClient = mongoose.connect(urlCloud, {

@@ -16,27 +16,29 @@ function addDays (date, days) {
   return result
 }
 
-exports.createBorrowing = async (book, member) => {
+exports.createBorrowing = async (bookId, memberId) => {
   try {
-    var newWaktu = Date.now()
-    const borrowing = await db.Borrowing.create({
-      BorrowedDate: newWaktu,
-      DueDate: addDays(newWaktu, 7),
-      Status: 'Borrowed'
+    const book = await db.Book.findOne({
+      Book_id: bookId
     })
-
-    const result = await db.Borrowing.updateOne(
-      {
-        _id: borrowing._id
-      },
-      {
+    const member = await db.Member.findOne({
+      Member_id: memberId
+    })
+    if (book === null || member === null) {
+      throw new Error('Book or Member not exist')
+    } else {
+      var newWaktu = Date.now()
+      const borrowing = await db.Borrowing.create({
         Book: book._id,
-        Borrower: member._id
-      }
-    )
-    return result
+        Borrower: member._id,
+        BorrowedDate: newWaktu,
+        DueDate: addDays(newWaktu, 7),
+        Status: 'Borrowed'
+      })
+      return borrowing
+    }
   } catch (err) {
-    console.log(err)
+    throw Error(err)
   }
 }
 
