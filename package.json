@@ -1,5 +1,8 @@
 {
   "name": "library-api",
+  "jest": {
+    "testEnvironment": "node"
+  },
   "version": "1.0.0",
   "description": "api for smart library",
   "main": "src/server.js",

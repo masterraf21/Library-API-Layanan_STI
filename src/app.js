@@ -35,7 +35,7 @@ mongoClient
   })
 
 // Import Routes
-
+const bookRoutes = require('./routes/book.routes')
 // App
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -46,5 +46,8 @@ app.use(cookieParser())
 // Swagger docs
 app.use('/api', swaggerUi.serve)
 app.get('/api', swaggerUi.setup(swaggerDocument))
+
+// Use Routes
+bookRoutes(app)
 
 module.exports = app
