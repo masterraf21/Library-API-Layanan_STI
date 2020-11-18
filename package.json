@@ -11,6 +11,8 @@
     "start": "npx nodemon src/server.js",
     "commit": "npx cz",
     "seed": "node src/scripts/seeder.js",
+    "seed:seed": "npx npm-run-all -s -c seed seed",
+    "seed:test": "npx npm-run-all -s -c seed seed test",
     "tester": "node src/scripts/tester.js"
   },
   "keywords": ["api", "express", "redis"],
@@ -36,6 +38,8 @@
     "cz-conventional-changelog": "^3.3.0",
     "jest": "^26.4.2",
     "nodemon": "^2.0.6",
-    "standard": "^14.3.4"
+    "npm-run-all": "^4.1.5",
+    "standard": "^14.3.4",
+    "supertest": "^6.0.1"
   }
 }

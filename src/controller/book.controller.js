@@ -5,7 +5,7 @@ exports.get = (req, res) => {
     .getAllBooks()
     .then(
       books => {
-        if (JSON.stringify(books) !== '[]') {
+        if (JSON.stringify(books) !== 'null') {
           res.status(200).json(books)
         } else {
           res.status(404).send({
@@ -114,7 +114,7 @@ exports.getById = (req, res) => {
     .getBookId(id)
     .then(
       book => {
-        if (JSON.stringify(book) !== '[]') {
+        if (JSON.stringify(book) !== 'null') {
           res.status(200).json(book)
         } else {
           res.status(404).send({
@@ -136,7 +136,7 @@ exports.getById = (req, res) => {
 }
 
 // Query: title, ISBN, author
-exports.getByQuery = (req, res) => {
+exports.getQuery = (req, res) => {
   if (req.query.title) {
     const title = req.query.title
     bookHelper
@@ -219,7 +219,7 @@ exports.getByQuery = (req, res) => {
       .getALlBookTitleISBN(title, ISBN)
       .then(
         book => {
-          if (JSON.stringify(book) !== '[]') {
+          if (JSON.stringify(book) !== '[]]') {
             res.status(200).json(book)
           } else {
             res.status(404).send({

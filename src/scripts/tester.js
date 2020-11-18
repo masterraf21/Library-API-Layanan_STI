@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { createBorrowing, returnBorrowing } = require('../helper')
+const { borrowingHelper } = require('../helper')
 const mongoose = require('mongoose')
 const autoIncrement = require('mongoose-auto-increment')
 const urlCloud = process.env.MONGO_URL
@@ -17,7 +17,8 @@ const exit = function () {
   })
 }
 const run = function () {
-  createBorrowing(3, 3)
+  borrowingHelper
+    .createBorrowing(3, 4)
     .then(
       result => {
         console.log('Created Borrowing')
@@ -33,6 +34,31 @@ const run = function () {
     .catch(err => console.error(err.message))
 }
 
+const borrowTester = function () {
+  borrowingHelper
+    .returnBorrowing(2, 1)
+    .then(
+      borrowings => {
+        console.log(borrowings)
+        exit()
+      },
+      err => {
+        console.error(err.message)
+        exit()
+      }
+    )
+    .catch(err => console.error(err.message))
+}
+
+const borrowHelper = async () => {
+  try {
+    const result = await borrowingHelper.createBorrowing(1, 1)
+    console.log(result)
+    exit()
+  } catch (err) {
+    console.error(err)
+  }
+}
 const mongoClient = mongoose.connect(urlCloud, {
   useCreateIndex: true,
   useNewUrlParser: true,
@@ -41,7 +67,8 @@ const mongoClient = mongoose.connect(urlCloud, {
 mongoClient
   .then(
     db => {
-      run()
+      console.log('Connected to db, executing tester script')
+      borrowTester()
     },
     err => {
       console.log(err)

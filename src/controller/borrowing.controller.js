@@ -94,9 +94,9 @@ exports.return = (req, res) => {
       .returnBorrowing(req.body.book_id, req.body.member_id)
       .then(
         result => {
-          res.status(201).send({
+          res.status(200).send({
             message:
-              'Successfully borrowed for book_id: ' +
+              'Successfully return borrowing for book_id: ' +
               req.body.book_id +
               ' & member_id: ' +
               req.body.member_id

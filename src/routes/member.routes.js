@@ -12,5 +12,5 @@ module.exports = app => {
   app.get('/api/members', [], controller.get)
   app.post('/api/members', [], controller.create)
   app.get('/api/members/:memberId', [], controller.getById)
-  app.get('/api/members/p', [], controller.getByQuery)
+  app.get('/api/members_query', [], controller.getByQuery)
 }
