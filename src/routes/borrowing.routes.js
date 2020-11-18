@@ -8,4 +8,10 @@ module.exports = app => {
     )
     next()
   })
+
+  app.get('/api/borrowings', [], controller.get)
+  app.post('/api/borrowings', [], controller.create)
+  app.post('/api/borrowings/return', [], controller.return)
+  app.get('/api/borrowings/returned', [], controller.getReturned)
+  app.get('/api/borrowings/current', [], controller.getCurrent)
 }
