@@ -10,6 +10,18 @@ var connection = mongoose.createConnection(dbUrl, {
 autoIncrement.initialize(connection)
 const db = require('../models')
 
+const createMember = async (Name, Address, Phone) => {
+  try {
+    const result = db.Member.create({
+      Name: Name,
+      Address: Address,
+      Phone: Phone
+    })
+    return result
+  } catch (err) {
+    throw new Error(err)
+  }
+}
 const getAllMembers = async () => {
   try {
     const members = await db.Member.find()
@@ -42,6 +54,7 @@ const getMemberName = async name => {
 }
 
 module.exports = {
+  createMember,
   getAllMembers,
   getMemberId,
   getMemberName
