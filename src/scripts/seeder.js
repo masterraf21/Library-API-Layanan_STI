@@ -22,21 +22,10 @@ const mongoClient = mongoose.connect(dbUrl, {
 mongoClient
   .then(
     db => {
-      try {
-        mongoose.connection.db.dropDatabase(() => {
-          console.log(`${connection.db.databaseName} database dropped.`)
-        })
-      } catch (err) {
-        console.error(err)
-        process.exit(0)
-      }
-
       console.log(
         `Connected to MongoDB, Prepare to load seed data from ${data} ...`
       )
-      const mongoSeeder = new MongooseDataSeeder({
-        dropCollection: true
-      })
+      const mongoSeeder = new MongooseDataSeeder({})
 
       mongoSeeder
         .load(data)

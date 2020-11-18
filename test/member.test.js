@@ -32,6 +32,21 @@ describe('Testing suite for Members API', () => {
     }
   })
 
+  it('Should not create a member', async done => {
+    try {
+      const payload = {
+        name: 'Vito Corleone',
+        address: 'Long Beach, New York'
+      }
+      const res = await request.post('/api/members').send(payload)
+      expect(res.statusCode).toEqual(400)
+      done()
+    } catch (err) {
+      console.error(err)
+      done(err)
+    }
+  })
+
   it('Should return a specific member data', async done => {
     try {
       const res = await request.get('/api/members/1')

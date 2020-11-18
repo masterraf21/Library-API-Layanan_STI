@@ -7,12 +7,13 @@
   "description": "api for smart library",
   "main": "src/server.js",
   "scripts": {
+    "drop": "node src/scripts/drop.js",
     "test": "npx jest --verbose --forceExit --detectOpenHandles --maxWorkers=10",
     "start": "npx nodemon src/server.js",
     "commit": "npx cz",
     "seed": "node src/scripts/seeder.js",
-    "seed:seed": "npx npm-run-all -s -c seed seed",
-    "seed:test": "npx npm-run-all -s -c seed seed test",
+    "reset": "npx npm-run-all -s drop seed",
+    "reset:test": "npm run reset && npm test",
     "tester": "node src/scripts/tester.js"
   },
   "keywords": ["api", "express", "redis"],
