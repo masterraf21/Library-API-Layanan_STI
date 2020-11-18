@@ -89,10 +89,15 @@ const returnBorrowing = async (bookId, memberId) => {
         BorrowingHistory: borrowing._id
       }
     })
-    const result = await db.Borrowing.findByIdAndUpdate(borrowing._id, {
-      Status: 'Returned',
-      ReturnDate: Date.now()
-    })
+    const result = await db.Borrowing.updateOne(
+      {
+        _id: borrowing._id
+      },
+      {
+        Status: 'Returned',
+        ReturnDate: Date.now()
+      }
+    )
     return result
   } catch (err) {
     throw Error(err)
