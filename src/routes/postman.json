@@ -1,3 +1,934 @@
 {
-  "openapi": "3.0.0"
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Library API",
+    "version": "1.0.0",
+    "description": "Back End API for Smart Library System",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "x-logo": {
+      "url": ""
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:45000/api"
+    }
+  ],
+  "paths": {
+    "/books": {
+      "get": {
+        "summary": "Get all Books data",
+        "tags": ["Book"],
+        "responses": {
+          "200": {
+            "description": "All Book Data in Array of JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No Books found"
+          },
+          "500": {
+            "description": "Database error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new Book data",
+        "tags": ["Book"],
+        "requestBody": {
+          "description": "Books data to be created",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookCreate"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "201": {
+            "description": "Successfullly created a new book data"
+          },
+          "400": {
+            "description": "Required Body not found"
+          },
+          "500": {
+            "description": "Database error"
+          }
+        }
+      }
+    },
+    "/books/bulk": {
+      "post": {
+        "tags": ["Book"],
+        "summary": "Create multiple instance of book data",
+        "requestBody": {
+          "description": "Books data to be created",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookCreateBulk"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfullly created new books data"
+          },
+          "400": {
+            "description": "Required Body not found"
+          },
+          "500": {
+            "description": "Database error"
+          }
+        }
+      }
+    },
+    "/books/{bookId}": {
+      "get": {
+        "tags": ["Book"],
+        "summary": "Get a spesific book data by providing book_id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bookId",
+            "required": true,
+            "description": "Book_id primary key identifier in database",
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book data",
+            "content": {
+              "application/jsom": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No Book found with id"
+          },
+          "500": {
+            "description": "Database error"
+          }
+        }
+      }
+    },
+    "/books_query": {
+      "get": {
+        "description": "Get Books by providing Query Params",
+        "tags": ["Book"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "title",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "Lolita"
+            },
+            "description": "Book Title"
+          },
+          {
+            "in": "query",
+            "name": "author",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "Vladimir Nabokov"
+            },
+            "description": "Book Author"
+          },
+          {
+            "in": "query",
+            "name": "ISBN",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "0882332287"
+            },
+            "description": "Book ISBN"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A book data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Required query not found"
+          },
+          "404": {
+            "description": "No Book found with said query params"
+          },
+          "500": {
+            "description": "Database error"
+          }
+        }
+      }
+    },
+    "/members": {
+      "get": {
+        "summary": "Get all Members data",
+        "tags": ["Member"],
+        "responses": {
+          "200": {
+            "description": "All Member Data in Array of JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Member"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No Members found"
+          },
+          "500": {
+            "description": "Database error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new Member data",
+        "tags": ["Member"],
+        "requestBody": {
+          "description": "Member data to be created",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberCreate"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "201": {
+            "description": "Successfullly created a new Member data"
+          },
+          "400": {
+            "description": "Required Body not found"
+          },
+          "500": {
+            "description": "Database error"
+          }
+        }
+      }
+    },
+    "/members/{memberId}": {
+      "get": {
+        "tags": ["Member"],
+        "summary": "Get a spesific book data by providing Member_id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "memberId",
+            "required": true,
+            "description": "Member_id primary key identifier in database",
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Member data",
+            "content": {
+              "application/jsom": {
+                "schema": {
+                  "$ref": "#/components/schemas/Member"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No Member found with id"
+          },
+          "500": {
+            "description": "Database error"
+          }
+        }
+      }
+    },
+    "/members_query": {
+      "get": {
+        "description": "Get Members by providing Query Params",
+        "tags": ["Member"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "John Green"
+            },
+            "description": "Member's name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Member data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Member"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Required query not found"
+          },
+          "404": {
+            "description": "No Member found with said query params"
+          },
+          "500": {
+            "description": "Database error"
+          }
+        }
+      }
+    },
+    "/borrowings": {
+      "get": {
+        "summary": "Get all Borrowings data, can be populated or not",
+        "tags": ["Borrowing"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "populate",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["no"]
+            },
+            "description": "Option whether want to get populated data or not"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All Book Data in Array of JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    { "$ref": "#/components/schemas/Borrowing" },
+                    { "$ref": "#/components/schemas/BorrowingPopulate" }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Populate only no"
+          },
+          "404": {
+            "description": "No Borrowings found"
+          },
+          "500": {
+            "description": "Database error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Borrowing"],
+        "summary": "Endpoint for Book Borrowingr",
+        "requestBody": {
+          "description": "Data needed to create borrowing",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BorrowingCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfullly borrowed for book_id and member_id"
+          },
+          "400": {
+            "description": "Required Body not found"
+          },
+          "500": {
+            "description": "Database error || Book already borrowed || No Book Found || No Member Found"
+          }
+        }
+      }
+    },
+    "/borrowings/return": {
+      "post": {
+        "tags": ["Borrowing"],
+        "summary": "Endpoint for Book Returning",
+        "requestBody": {
+          "description": "Book and Member data to return",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BorrowingCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfullly return borrowed book"
+          },
+          "400": {
+            "description": "Required Body not found"
+          },
+          "500": {
+            "description": "Book not borrowed || Book not found || Member not found || Borrowing not found"
+          }
+        }
+      }
+    },
+    "/borrowings/returned": {
+      "get": {
+        "summary": "Get all Returned Borrowings data, can be populated or not",
+        "tags": ["Borrowing"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "populate",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["no"]
+            },
+            "description": "Option whether want to get populated data or not"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All Returned Borrowing Data in Array of JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    { "$ref": "#/components/schemas/BorrowingReturned" },
+                    { "$ref": "#/components/schemas/BorrowingPopulateReturned" }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Populate only no"
+          },
+          "404": {
+            "description": "No Borrowings found"
+          },
+          "500": {
+            "description": "Database error"
+          }
+        }
+      }
+    },
+    "/borrowings/current": {
+      "get": {
+        "summary": "Get all Currently Borrowed Borrowings data, can be populated or not",
+        "tags": ["Borrowing"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "populate",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["no"]
+            },
+            "description": "Option whether want to get populated data or not"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All Currently Borrowed Borrowing Data in Array of JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    { "$ref": "#/components/schemas/BorrowingBorrowed" },
+                    { "$ref": "#/components/schemas/BorrowingPopulateBorrowed" }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Populate only no"
+          },
+          "404": {
+            "description": "No Borrowings found"
+          },
+          "500": {
+            "description": "Database error"
+          }
+        }
+      }
+    }
+  },
+
+  "tags": [
+    {
+      "name": "Book",
+      "description": "Book Endpoints and resources"
+    },
+    {
+      "name": "Member",
+      "description": "Member Endpoints and resources"
+    },
+    {
+      "name": "Borrowing",
+      "description": "Borrow and return Endpoints"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Book": {
+        "description": "Book stored in library",
+        "type": "object",
+        "properties": {
+          "Book_id": {
+            "type": "number",
+            "description": "Primary key for Book Model",
+            "example": 1
+          },
+          "ISBN": {
+            "type": "string",
+            "example": "1299427383"
+          },
+          "Title": {
+            "type": "string",
+            "example": "What We Talk About When We Talk About Love"
+          },
+          "Author": {
+            "type": "string",
+            "example": "Raymond Carver"
+          },
+          "Category": {
+            "type": "string",
+            "example": "Fiction"
+          },
+          "Publisher": {
+            "type": "string",
+            "example": "Penguin Adult"
+          },
+          "Borrowed": {
+            "type": "boolean",
+            "example": "true"
+          },
+          "CurrentlyBorrowedBy": {
+            "type": "object",
+            "description": "Object Id of Member who currently borrowing the book",
+            "example": "ObjectId('5fb4e2c3b7ad5b4108d0ff67')"
+          },
+          "BorrowingHistory": {
+            "type": "array",
+            "description": "Array of Object if of Borrowing",
+            "example": [
+              "ObjectId('5fb4e2c3b7ad5b4108d0ff67')",
+              "ObjectId('5fb4e2c3b7ad5b4108d0ff67')"
+            ]
+          }
+        },
+        "xml": {
+          "name": "Book"
+        }
+      },
+      "BookCreate": {
+        "description": "Book stored in library",
+        "type": "object",
+        "properties": {
+          "ISBN": {
+            "type": "string",
+            "example": "1299427383"
+          },
+          "title": {
+            "type": "string",
+            "example": "What We Talk About When We Talk About Love"
+          },
+          "author": {
+            "type": "string",
+            "example": "Raymond Carver"
+          },
+          "category": {
+            "type": "string",
+            "example": "Fiction"
+          },
+          "publisher": {
+            "type": "string",
+            "example": "Penguin Adult"
+          }
+        },
+        "xml": {
+          "name": "BookCreate"
+        }
+      },
+      "BookCreateBulk": {
+        "description": "Book stored in library",
+        "type": "object",
+        "properties": {
+          "ISBN": {
+            "type": "string",
+            "example": "1299427383"
+          },
+          "title": {
+            "type": "string",
+            "example": "What We Talk About When We Talk About Love"
+          },
+          "author": {
+            "type": "string",
+            "example": "Raymond Carver"
+          },
+          "category": {
+            "type": "string",
+            "example": "Fiction"
+          },
+          "publisher": {
+            "type": "string",
+            "example": "Penguin Adult"
+          },
+          "count": {
+            "type": "integer",
+            "example": 1,
+            "minimum": 1
+          }
+        },
+        "xml": {
+          "name": "BookCreateBulk"
+        }
+      },
+      "Member": {
+        "description": "Member of the library",
+        "type": "object",
+        "properties": {
+          "Member_id": {
+            "type": "number",
+            "example": 1
+          },
+          "Name": {
+            "type": "string",
+            "example": "Charles Kinbote"
+          },
+          "Address": {
+            "type": "string",
+            "example": "New Wye, Appalachia"
+          },
+          "Phone": {
+            "type": "string",
+            "example": "08121321312"
+          },
+          "BorrowingHistory": {
+            "type": "array",
+            "description": "Array of Object of Borrowing Model",
+            "example": [
+              "ObjectId('5fb4e2c3b7ad5b4108d0ff67')",
+              "ObjectId('5fb4e2c3b7ad5b4108d0ff67')"
+            ]
+          }
+        },
+        "xml": {
+          "name": "Member"
+        }
+      },
+      "MemberCreate": {
+        "description": "Member data to create Member",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Charles Kinbote"
+          },
+          "address": {
+            "type": "string",
+            "example": "New Wye, Appalachia"
+          },
+          "phone": {
+            "type": "string",
+            "example": "08121321312"
+          }
+        },
+        "xml": {
+          "name": "MemberCreate"
+        }
+      },
+      "Borrowing": {
+        "description": "Borrowing model who records borrowing activities of Member",
+        "type": "object",
+        "properties": {
+          "Book": {
+            "type": "object",
+            "description": "Object Id of Book referencing to Book model",
+            "example": "ObjectId('5fb4e2c3b7ad5b4108d0ff67')"
+          },
+          "Borrower": {
+            "type": "object",
+            "description": "Object Id of Borrower referncing to Member model",
+            "example": "ObjectId('5fb4e2c3b7ad5b4108d0ff67')"
+          },
+          "BorrowedDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-11-18T09:00:51.294+00:00"
+          },
+          "DueDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-11-18T09:00:51.294+00:00"
+          },
+          "ReturnDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-11-18T09:00:51.294+00:00"
+          },
+          "Status": {
+            "type": "string",
+            "enum": ["Borrowed", "Returned"]
+          }
+        },
+        "xml": {
+          "name": "Borrowing"
+        }
+      },
+      "BorrowingReturned": {
+        "description": "Borrowing model who records borrowing activities of Member",
+        "type": "object",
+        "properties": {
+          "Book": {
+            "type": "object",
+            "description": "Object Id of Book referencing to Book model",
+            "example": "ObjectId('5fb4e2c3b7ad5b4108d0ff67')"
+          },
+          "Borrower": {
+            "type": "object",
+            "description": "Object Id of Borrower referncing to Member model",
+            "example": "ObjectId('5fb4e2c3b7ad5b4108d0ff67')"
+          },
+          "BorrowedDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-11-18T09:00:51.294+00:00"
+          },
+          "DueDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-11-18T09:00:51.294+00:00"
+          },
+          "ReturnDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-11-18T09:00:51.294+00:00"
+          },
+          "Status": {
+            "type": "string",
+            "enum": ["Returned"]
+          }
+        },
+        "xml": {
+          "name": "BorrowingReturned"
+        }
+      },
+      "BorrowingBorrowed": {
+        "description": "Borrowing model who records borrowing activities of Member",
+        "type": "object",
+        "properties": {
+          "Book": {
+            "type": "object",
+            "description": "Object Id of Book referencing to Book model",
+            "example": "ObjectId('5fb4e2c3b7ad5b4108d0ff67')"
+          },
+          "Borrower": {
+            "type": "object",
+            "description": "Object Id of Borrower referncing to Member model",
+            "example": "ObjectId('5fb4e2c3b7ad5b4108d0ff67')"
+          },
+          "BorrowedDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-11-18T09:00:51.294+00:00"
+          },
+          "DueDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-11-18T09:00:51.294+00:00"
+          },
+          "ReturnDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-11-18T09:00:51.294+00:00"
+          },
+          "Status": {
+            "type": "string",
+            "enum": ["Borrowed"]
+          }
+        },
+        "xml": {
+          "name": "Borrowing"
+        }
+      },
+      "BorrowingPopulate": {
+        "description": "Borrowing model who records borrowing activities of Member",
+        "type": "object",
+        "properties": {
+          "Book": {
+            "type": "object",
+            "description": "Object of Book referencing to Book model",
+            "$ref": "#/components/schemas/Book"
+          },
+          "Borrower": {
+            "type": "object",
+            "description": "Object of Borrower referncing to Member model",
+            "$ref": "#/components/schemas/Member"
+          },
+          "BorrowedDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-11-18T09:00:51.294+00:00"
+          },
+          "DueDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-11-18T09:00:51.294+00:00"
+          },
+          "ReturnDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-11-18T09:00:51.294+00:00"
+          },
+          "Status": {
+            "type": "string",
+            "enum": ["Borrowed", "Returned"]
+          }
+        },
+        "xml": {
+          "name": "BorrowingPopulate"
+        }
+      },
+      "BorrowingPopulateReturned": {
+        "description": "Borrowing model who records borrowing activities of Member",
+        "type": "object",
+        "properties": {
+          "Book": {
+            "type": "object",
+            "description": "Object of Book referencing to Book model",
+            "$ref": "#/components/schemas/Book"
+          },
+          "Borrower": {
+            "type": "object",
+            "description": "Object of Borrower referncing to Member model",
+            "$ref": "#/components/schemas/Member"
+          },
+          "BorrowedDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-11-18T09:00:51.294+00:00"
+          },
+          "DueDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-11-18T09:00:51.294+00:00"
+          },
+          "ReturnDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-11-18T09:00:51.294+00:00"
+          },
+          "Status": {
+            "type": "string",
+            "enum": ["Returned"]
+          }
+        },
+        "xml": {
+          "name": "BorrowingPopulateReturned"
+        }
+      },
+      "BorrowingPopulateBorrowed": {
+        "description": "Borrowing model who records borrowing activities of Member",
+        "type": "object",
+        "properties": {
+          "Book": {
+            "type": "object",
+            "description": "Object of Book referencing to Book model",
+            "$ref": "#/components/schemas/Book"
+          },
+          "Borrower": {
+            "type": "object",
+            "description": "Object of Borrower referncing to Member model",
+            "$ref": "#/components/schemas/Member"
+          },
+          "BorrowedDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-11-18T09:00:51.294+00:00"
+          },
+          "DueDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-11-18T09:00:51.294+00:00"
+          },
+          "ReturnDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-11-18T09:00:51.294+00:00"
+          },
+          "Status": {
+            "type": "string",
+            "enum": ["Borrowed"]
+          }
+        },
+        "xml": {
+          "name": "BorrowingPopulateBorrowed"
+        }
+      },
+      "BorrowingCreate": {
+        "description": "Borrowing model who records borrowing activities of Member",
+        "type": "object",
+        "properties": {
+          "book_id": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "member_id": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "xml": {
+          "name": "BorrowingCreate"
+        }
+      }
+    }
+  }
 }
