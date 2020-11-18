@@ -4,13 +4,14 @@ const autoIncrement = require('mongoose-auto-increment')
 const bookSchema = new mongoose.Schema({
   Book_id: {
     type: Number,
-    required: true
+    required: true,
+    unique: true,
+    index: true
   },
   ISBN: {
     type: String,
     unique: true,
-    required: true,
-    index: true
+    required: true
   },
   Title: {
     type: String,
@@ -28,20 +29,18 @@ const bookSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  CurrentStock: {
-    type: Number,
-    required: true
+  Borrowed: {
+    type: Boolean,
+    default: false
   },
-  CurrentlyBorrowedBy: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Member'
-    }
-  ],
+  CurrentlyBorrowedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Member'
+  },
   BorrowingHistory: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Member'
+      ref: 'Borrowing'
     }
   ]
 })

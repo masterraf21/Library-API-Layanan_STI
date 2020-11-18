@@ -4,7 +4,8 @@ const autoIncrement = require('mongoose-auto-increment')
 const memberSchema = mongoose.Schema({
   Member_id: {
     type: Number,
-    required: true
+    required: true,
+    unique: true
   },
   Name: {
     type: String,
@@ -18,12 +19,6 @@ const memberSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  CurrentlyBorrowing: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Book'
-    }
-  ],
   // Only added when book is returned
   BorrowingHistory: [
     {
