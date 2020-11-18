@@ -6,7 +6,10 @@ REST API for tugas besar Layanan STI
 2. run  ```
         npm install
         ```
-3. API server should be on http://localhost:API_PORT
+3. run  ```
+        npm start
+        ```
+4. API server should be on http://localhost:API_PORT
 
 ## API Docs (Coming Soon)
 By default, there is already an api docs by swagger in /api. Open http://localhost:API_PORT/api in your browser to see the api docs
