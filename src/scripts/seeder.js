@@ -1,6 +1,7 @@
 // Library: https://github.com/jianwu-github/mongoose-data-seeder
 require('dotenv').config()
 const mongoose = require('mongoose')
+mongoose.set('useFindAndModify', false)
 const MongooseDataSeeder = require('mongoose-data-seeder')
 const autoIncrement = require('mongoose-auto-increment')
 const data = require('./data.json')

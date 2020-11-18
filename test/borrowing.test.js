@@ -45,6 +45,17 @@ describe('Testing suite for Borrowings API', () => {
     }
   })
 
+  it('Should return all borrowings bcs why not', async done => {
+    try {
+      const res = await request.get('/api/borrowings')
+      expect(res.statusCode).toEqual(200)
+      done()
+    } catch (err) {
+      console.error(err)
+      done(err)
+    }
+  })
+
   it('Should not create a borrowing', async done => {
     const payload = {
       book_id: 1,

@@ -6,6 +6,7 @@ const swaggerDocument = require('./routes/postman.json')
 const mongoose = require('mongoose')
 const autoIncrement = require('mongoose-auto-increment')
 mongoose.Promise = require('bluebird')
+mongoose.set('useFindAndModify', false)
 require('dotenv').config()
 
 // Mongo

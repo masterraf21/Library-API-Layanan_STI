@@ -1,6 +1,7 @@
 require('dotenv').config()
 const { borrowingHelper } = require('../helper')
 const mongoose = require('mongoose')
+mongoose.set('useFindAndModify', false)
 const autoIncrement = require('mongoose-auto-increment')
 const urlCloud = process.env.MONGO_URL
 var connection = mongoose.createConnection(urlCloud, {
@@ -62,7 +63,8 @@ const borrowHelper = async () => {
 const mongoClient = mongoose.connect(urlCloud, {
   useCreateIndex: true,
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 })
 mongoClient
   .then(
