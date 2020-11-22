@@ -133,9 +133,9 @@
         }
       }
     },
-    "/books_query": {
+    "/books/query": {
       "get": {
-        "description": "Get Books by providing Query Params",
+        "summary": "Get Books by providing Query Params",
         "tags": ["Book"],
         "parameters": [
           {
@@ -279,9 +279,9 @@
         }
       }
     },
-    "/members_query": {
+    "/members/query": {
       "get": {
-        "description": "Get Members by providing Query Params",
+        "summary": "Get Members by providing Query Params",
         "tags": ["Member"],
         "parameters": [
           {
