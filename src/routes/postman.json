@@ -28,7 +28,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Book"
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/Book"
+                    }
+                  
                 }
               }
             }
@@ -117,7 +121,7 @@
           "200": {
             "description": "Book data",
             "content": {
-              "application/jsom": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Book"
                 }
@@ -133,7 +137,7 @@
         }
       }
     },
-    "/books/query": {
+    "/books/query/p": {
       "get": {
         "summary": "Get Books by providing Query Params",
         "tags": ["Book"],
@@ -279,7 +283,7 @@
         }
       }
     },
-    "/members/query": {
+    "/members/query/p": {
       "get": {
         "summary": "Get Members by providing Query Params",
         "tags": ["Member"],
