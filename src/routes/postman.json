@@ -206,7 +206,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Member"
+                    "type": "array",
+                    "items": {
+                         "$ref": "#/components/schemas/Member"
+                    }
+                 
                 }
               }
             }
