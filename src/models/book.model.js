@@ -35,7 +35,8 @@ const bookSchema = new mongoose.Schema({
   },
   CurrentlyBorrowedBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Member'
+    ref: 'Member',
+    default: null
   },
   BorrowingHistory: [
     {

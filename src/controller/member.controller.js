@@ -63,7 +63,7 @@ exports.getById = (req, res) => {
     .getMemberId(id)
     .then(
       member => {
-        if (JSON.stringify(member) !== '[]') {
+        if (JSON.stringify(member) !== 'null') {
           res.status(200).json(member)
         } else {
           res.status(404).send({

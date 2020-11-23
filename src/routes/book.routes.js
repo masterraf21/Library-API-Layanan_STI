@@ -13,5 +13,5 @@ module.exports = app => {
   app.post('/api/books', [], controller.create)
   app.post('/api/books/bulk', [], controller.createBulk)
   app.get('/api/books/:bookId', [], controller.getById)
-  app.get('/api/books_query', [], controller.getQuery)
+  app.get('/api/books/query/p', [], controller.getQuery)
 }
