@@ -187,7 +187,7 @@
             }
           },
           "400": {
-            "description": "Required query not found"
+            "description": "Required queryy not found"
           },
           "404": {
             "description": "No Book found with said query params"
