@@ -398,7 +398,7 @@
     "/borrowings/return": {
       "post": {
         "tags": ["Borrowing"],
-        "summary": "Endpoint for Book Returning",
+        "summary": "Endpoint for Returning Book",
         "requestBody": {
           "description": "Book and Member data to return",
           "required": true,
@@ -411,7 +411,7 @@
           }
         },
         "responses": {
-          "201": {
+          "200": {
             "description": "Successfullly return borrowed book"
           },
           "400": {
@@ -419,6 +419,34 @@
           },
           "500": {
             "description": "Book not borrowed || Book not found || Member not found || Borrowing not found"
+          }
+        }
+      }
+    },
+    "/borrowings/extend": {
+      "post": {
+        "tags": ["Borrowing"],
+        "summary": "Endpoint for Extending Book",
+        "requestBody": {
+          "description": "Book and Member data to return",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BorrowingCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfullly Extend borrowed book by 7 days default"
+          },
+          "400": {
+            "description": "Required Body not found"
+          },
+          "500": {
+            "description": "Book late cannot extend ||Book not borrowed || Book not found || Member not found || Borrowing not found"
           }
         }
       }
@@ -931,7 +959,7 @@
             "example": "0"
           },
           "member_id": {
-            "type": "integer",
+            "type": "string",
             "example": "0"
           }
         },
