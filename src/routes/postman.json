@@ -370,7 +370,7 @@
       },
       "post": {
         "tags": ["Borrowing"],
-        "summary": "Endpoint for Book Borrowingr",
+        "summary": "Endpoint for Borrowing Book",
         "requestBody": {
           "description": "Data needed to create borrowing",
           "required": true,
