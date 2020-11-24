@@ -101,9 +101,9 @@ exports.return = (req, res) => {
               req.body.book_id +
               ' & member_id: ' +
               req.body.member_id +
-              ' with late of ' +
+              ' with ' +
               result.lateDays +
-              ' days'
+              ' days late'
           } else {
             message =
               'Successfully return borrowing for book_id: ' +
