@@ -349,10 +349,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "oneOf": [
+                     "type": "array",
+                  "items": {
+                    "oneOf": [
                     { "$ref": "#/components/schemas/Borrowing" },
                     { "$ref": "#/components/schemas/BorrowingPopulate" }
                   ]
+                  }
+                
                 }
               }
             }
