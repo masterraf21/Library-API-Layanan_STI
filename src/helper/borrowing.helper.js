@@ -52,6 +52,21 @@ const createBorrowing = async (bookId, memberId) => {
   }
 }
 
+const checkLate = (dueDate, nowDate) => {
+  var due = new Date(dueDate)
+  var now = new Date(nowDate)
+  var differenceInTime = now.getTime() - due.getTime()
+  var differenceInDays = differenceInTime / (1000 * 3600 * 24)
+  return differenceInDays > 7
+}
+
+const countLate = (dueDate, nowDate) => {
+  var due = new Date(dueDate)
+  var now = new Date(nowDate)
+  var differenceInTime = now.getTime() - due.getTime()
+  var differenceInDays = differenceInTime / (1000 * 3600 * 24)
+  return differenceInDays
+}
 const returnBorrowing = async (bookId, memberId) => {
   try {
     const book = await db.Book.findOne({
@@ -89,6 +104,16 @@ const returnBorrowing = async (bookId, memberId) => {
         BorrowingHistory: borrowing._id
       }
     })
+
+    var lateCount = null
+    if (borrowing.Late) {
+      lateCount = countLate(borrowing.DueDate, Date.now())
+    } else {
+      if (checkLate(borrowing.DueDate, Date.now())) {
+        borrowing.Late = true
+        lateCount = countLate(borrowing.DueDate, Date.now())
+      }
+    }
     const result = await db.Borrowing.updateOne(
       {
         _id: borrowing._id
@@ -96,6 +121,58 @@ const returnBorrowing = async (bookId, memberId) => {
       {
         Status: 'Returned',
         ReturnDate: Date.now()
+      }
+    )
+    var ret = {
+      result: result,
+      late: borrowing.Late,
+      lateDays: lateCount
+    }
+    return ret
+  } catch (err) {
+    throw Error(err)
+  }
+}
+
+const extendBorrowing = async (bookId, memberId) => {
+  try {
+    const book = await db.Book.findOne({
+      Book_id: bookId
+    })
+    if (book === null) {
+      throw new Error('Book not found')
+    }
+    if (!book.Borrowed) {
+      throw new Error('Book is not borrowed')
+    }
+    const member = await db.Member.findOne({
+      Member_id: memberId
+    })
+    if (member === null) {
+      throw new Error('Member not found')
+    }
+    const borrowing = await db.Borrowing.findOne({
+      Book: book._id,
+      Borrower: member._id
+    })
+    if (borrowing === null) {
+      throw new Error('Borrowing not found')
+    }
+
+    var telat = checkLate(borrowing.DueDate, Date.now())
+    if (telat) {
+      borrowing.Late = true
+    }
+    if (borrowing.Late) {
+      throw new Error('Book already late cannot Extend')
+    }
+
+    const result = await db.Borrowing.updateOne(
+      {
+        _id: borrowing._id
+      },
+      {
+        DueDate: addDays(Date.now(), 7)
       }
     )
     return result
@@ -180,5 +257,8 @@ module.exports = {
   getAllCurrentlyBorrowingNoPopulate,
   getAllReturnedBorrowing,
   getAllReturnedBorrowingNoPopulate,
-  getAllBorrowingNoPopulate
+  getAllBorrowingNoPopulate,
+  extendBorrowing,
+  checkLate,
+  countLate
 }

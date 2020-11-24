@@ -12,6 +12,7 @@ module.exports = app => {
   app.get('/api/borrowings', [], controller.get)
   app.post('/api/borrowings', [], controller.create)
   app.post('/api/borrowings/return', [], controller.return)
+  app.post('/api/borrowings/extend', [], controller.extend)
   app.get('/api/borrowings/returned', [], controller.getReturned)
   app.get('/api/borrowings/current', [], controller.getCurrent)
 }

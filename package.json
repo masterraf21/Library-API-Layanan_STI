@@ -14,7 +14,7 @@
     "seed": "node src/scripts/seeder.js",
     "reset": "npx npm-run-all -s drop seed",
     "reset:test": "npm run reset && npm test",
-    "tester": "node src/scripts/tester.js"
+    "tester": "node src/scripts/date.js"
   },
   "keywords": ["api", "express", "redis"],
   "author": "lasti kelompok 8",

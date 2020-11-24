@@ -94,9 +94,55 @@ exports.return = (req, res) => {
       .returnBorrowing(req.body.book_id, req.body.member_id)
       .then(
         result => {
+          var message = ''
+          if (result.late) {
+            message =
+              'Successfully return borrowing for book_id: ' +
+              req.body.book_id +
+              ' & member_id: ' +
+              req.body.member_id +
+              ' with late of ' +
+              result.lateDays +
+              ' days'
+          } else {
+            message =
+              'Successfully return borrowing for book_id: ' +
+              req.body.book_id +
+              ' & member_id: ' +
+              req.body.member_id +
+              ' with no late'
+          }
+          res.status(200).send({
+            message: message
+          })
+        },
+        err => {
+          res.status(500).send({
+            message: err.message
+          })
+        }
+      )
+      .catch(err => {
+        res.status(500).send({
+          message: err.message
+        })
+      })
+  } else {
+    res.status(400).send({
+      message: 'Required body not found'
+    })
+  }
+}
+
+exports.extend = (req, res) => {
+  if (req.body.member_id && req.body.book_id) {
+    borrowingHelper
+      .extendBorrowing(req.body.book_id, req.body.member_id)
+      .then(
+        result => {
           res.status(200).send({
             message:
-              'Successfully return borrowing for book_id: ' +
+              'Successfully Extended for book_id: ' +
               req.body.book_id +
               ' & member_id: ' +
               req.body.member_id
