@@ -481,10 +481,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "oneOf": [
+                    "type": "array",
+                  "items": {
+                     "oneOf": [
                     { "$ref": "#/components/schemas/BorrowingReturned" },
                     { "$ref": "#/components/schemas/BorrowingPopulateReturned" }
                   ]
+                  }
+                 
                 }
               }
             }
@@ -523,10 +527,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "oneOf": [
+                    "type": "array",
+                  "items": {
+                    "oneOf": [
                     { "$ref": "#/components/schemas/BorrowingBorrowed" },
                     { "$ref": "#/components/schemas/BorrowingPopulateBorrowed" }
                   ]
+                  }
+                 
                 }
               }
             }
