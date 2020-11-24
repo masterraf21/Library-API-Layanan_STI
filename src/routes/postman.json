@@ -272,7 +272,7 @@
           "200": {
             "description": "Member data",
             "content": {
-              "application/jsom": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Member"
                 }
