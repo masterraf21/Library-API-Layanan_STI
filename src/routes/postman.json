@@ -14,7 +14,12 @@
   },
   "servers": [
     {
-      "url": "http://localhost:45000/api"
+      "url": "http://localhost:45000/api",
+      "description": "Local Server"
+    },
+    {
+      "url": "http://13.76.168.130:45000/api",
+      "description": "Deployed Server"
     }
   ],
   "paths": {
@@ -349,14 +354,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                     "type": "array",
+                  "type": "array",
                   "items": {
                     "oneOf": [
-                    { "$ref": "#/components/schemas/Borrowing" },
-                    { "$ref": "#/components/schemas/BorrowingPopulate" }
-                  ]
+                      { "$ref": "#/components/schemas/Borrowing" },
+                      { "$ref": "#/components/schemas/BorrowingPopulate" }
+                    ]
                   }
-                
                 }
               }
             }
